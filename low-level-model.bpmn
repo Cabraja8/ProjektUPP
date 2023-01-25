@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1g8rtj4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.4.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
   <bpmn:collaboration id="RestoranID">
-    <bpmn:participant id="Participant_05a0wtj" name="Restoran" processRef="Process_1wwu149" />
+    <bpmn:participant id="Participant_05a0wtj" name="Restoran" processRef="Restoran" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1wwu149" isExecutable="true">
+  <bpmn:process id="Restoran" isExecutable="true">
     <bpmn:laneSet id="LaneSet_062wzl1">
+      <bpmn:lane id="Lane_1ijl3pd" name="Radnik">
+        <bpmn:flowNodeRef>pregledajID</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_12o4mfz</bpmn:flowNodeRef>
+      </bpmn:lane>
       <bpmn:lane id="Lane_02eq2mt" name="IS Restorana">
         <bpmn:flowNodeRef>SpremiID</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>PrikaziID</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>RacunID</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_1oafr59</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>PlatiID</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_07vo0rj</bpmn:flowNodeRef>
-      </bpmn:lane>
-      <bpmn:lane id="Lane_1ijl3pd" name="Radnik">
-        <bpmn:flowNodeRef>PripremiID</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>pregledajID</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_06xi2mg</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1oafr59</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:sequenceFlow id="Flow_0silqka" sourceRef="pregledajID" targetRef="PripremiID" />
-    <bpmn:sequenceFlow id="Flow_1dldlhe" sourceRef="PripremiID" targetRef="RacunID" />
-    <bpmn:sequenceFlow id="Flow_0uac6l8" sourceRef="PrikaziID" targetRef="pregledajID" />
-    <bpmn:userTask id="PripremiID" name="Pripremi naruđžbu">
-      <bpmn:incoming>Flow_0silqka</bpmn:incoming>
-      <bpmn:outgoing>Flow_1dldlhe</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:serviceTask id="SpremiID" name="Spremanje željenog odabira" camunda:type="external" camunda:topic="spremanjeOdabira">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Gost">gost1:Marko
+gost2:Ivan</camunda:inputParameter>
+          <camunda:inputParameter name="Narudzbe">narudzba:Pizza Margerita, Pizza Al Tonno, Coca Cola, Fanta</camunda:inputParameter>
+          <camunda:outputParameter name="narudzbe">narudzba:Pizza Margerita, Pizza Al Tonno, Coca Cola, Fanta</camunda:outputParameter>
+          <camunda:outputParameter name="Gost">gost1:Marko
+gost2:Ivan</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0mp9hsd</bpmn:incoming>
       <bpmn:outgoing>Flow_0kk19d4</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1ggpt7g">
@@ -34,36 +36,73 @@
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="PrikaziID" name="Prikaži Naruđžbe" camunda:type="external" camunda:topic="PrikaziNarudzbe">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Gost">gost1:Marko
+gost2:Ivan</camunda:inputParameter>
+          <camunda:inputParameter name="narudzbe">narudzba:Pizza Margerita, Pizza Al Tonno, Coca Cola, Fanta</camunda:inputParameter>
+          <camunda:outputParameter name="Gost">gost1:Marko
+gost2:Ivan</camunda:outputParameter>
+          <camunda:outputParameter name="narudzbe">narudzba:Pizza Margerita, Pizza Al Tonno, Coca Cola, Fanta</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0kk19d4</bpmn:incoming>
       <bpmn:outgoing>Flow_0uac6l8</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="pregledajID" name="Pregledaj Naruđžbe">
+    <bpmn:userTask id="pregledajID" name="Pregledaj Naruđžbe" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Gost">gost1:Marko
+gost2:Ivan</camunda:inputParameter>
+          <camunda:inputParameter name="narudzbe">narudzba:Pizza Margerita, Pizza Al Tonno, Coca Cola, Fanta</camunda:inputParameter>
+          <camunda:inputParameter name="racun">cijena:20</camunda:inputParameter>
+          <camunda:outputParameter name="Gost">gost1:Marko
+gost2:Ivan</camunda:outputParameter>
+          <camunda:outputParameter name="narudzbe">narudzba:Pizza Margerita, Pizza Al Tonno, Coca Cola, Fanta</camunda:outputParameter>
+          <camunda:outputParameter name="racun">cijena:20</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0uac6l8</bpmn:incoming>
       <bpmn:outgoing>Flow_0silqka</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0kk19d4" sourceRef="SpremiID" targetRef="PrikaziID" />
-    <bpmn:startEvent id="Event_1oafr59" name="Gost je naručio">
-      <bpmn:outgoing>Flow_0mp9hsd</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0lwqkq8" />
-    </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_0mp9hsd" sourceRef="Event_1oafr59" targetRef="SpremiID" />
     <bpmn:serviceTask id="RacunID" name="Prikaži račun" camunda:type="external" camunda:topic="PrikaziRacun">
-      <bpmn:incoming>Flow_1dldlhe</bpmn:incoming>
+      <bpmn:incoming>Flow_0n9gd88</bpmn:incoming>
       <bpmn:outgoing>Flow_17vt59s</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_17vt59s" sourceRef="RacunID" targetRef="PlatiID" />
-    <bpmn:userTask id="PlatiID" name="Korisnik je platio">
+    <bpmn:userTask id="PlatiID" name="Korisnik je platio" camunda:assignee="demo">
       <bpmn:incoming>Flow_17vt59s</bpmn:incoming>
       <bpmn:outgoing>Flow_0y4rwsk</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0y4rwsk" sourceRef="PlatiID" targetRef="Event_07vo0rj" />
     <bpmn:endEvent id="Event_07vo0rj">
       <bpmn:incoming>Flow_0y4rwsk</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:boundaryEvent id="Event_06xi2mg" attachedToRef="PripremiID">
-      <bpmn:timerEventDefinition id="TimerEventDefinition_1p43h41" />
-    </bpmn:boundaryEvent>
     <bpmn:dataStoreReference id="DataStoreReference_1bf768w" name="DB" />
+    <bpmn:startEvent id="Event_1oafr59" name="Gost je naručio">
+      <bpmn:outgoing>Flow_0mp9hsd</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0silqka" sourceRef="pregledajID" targetRef="Activity_12o4mfz" />
+    <bpmn:sequenceFlow id="Flow_0mp9hsd" sourceRef="Event_1oafr59" targetRef="SpremiID" />
+    <bpmn:sequenceFlow id="Flow_0kk19d4" sourceRef="SpremiID" targetRef="PrikaziID" />
+    <bpmn:sequenceFlow id="Flow_0uac6l8" sourceRef="PrikaziID" targetRef="pregledajID" />
+    <bpmn:sequenceFlow id="Flow_17vt59s" sourceRef="RacunID" targetRef="PlatiID" />
+    <bpmn:sequenceFlow id="Flow_0y4rwsk" sourceRef="PlatiID" targetRef="Event_07vo0rj" />
+    <bpmn:sequenceFlow id="Flow_0n9gd88" sourceRef="Activity_12o4mfz" targetRef="RacunID" />
+    <bpmn:userTask id="Activity_12o4mfz" name="Pripremi naruđžbu" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Gost">gost1:Marko
+gost2:Ivan</camunda:inputParameter>
+          <camunda:inputParameter name="narudzbe">narudzba:Pizza Margerita, Pizza Al Tonno, Coca Cola, Fanta</camunda:inputParameter>
+          <camunda:inputParameter name="racun">cijena:20</camunda:inputParameter>
+          <camunda:outputParameter name="Gost">gost1:Marko
+gost2:Ivan</camunda:outputParameter>
+          <camunda:outputParameter name="narudzbe">narudzba:Pizza Margerita, Pizza Al Tonno, Coca Cola, Fanta</camunda:outputParameter>
+          <camunda:outputParameter name="racun">cijena:20</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0silqka</bpmn:incoming>
+      <bpmn:outgoing>Flow_0n9gd88</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="RestoranID">
@@ -71,16 +110,13 @@
         <dc:Bounds x="160" y="80" width="1180" height="780" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_1ijl3pd_di" bpmnElement="Lane_1ijl3pd" isHorizontal="true">
-        <dc:Bounds x="190" y="540" width="1150" height="320" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_02eq2mt_di" bpmnElement="Lane_02eq2mt" isHorizontal="true">
         <dc:Bounds x="190" y="80" width="1150" height="460" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0figsns_di" bpmnElement="PripremiID">
-        <dc:Bounds x="850" y="710" width="100" height="80" />
+      <bpmndi:BPMNShape id="Lane_1ijl3pd_di" bpmnElement="Lane_1ijl3pd" isHorizontal="true">
+        <dc:Bounds x="190" y="540" width="1150" height="320" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0b25ebc_di" bpmnElement="SpremiID">
         <dc:Bounds x="470" y="230" width="100" height="80" />
@@ -91,12 +127,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_18u4fff_di" bpmnElement="pregledajID">
         <dc:Bounds x="470" y="710" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0vdumcz_di" bpmnElement="Event_1oafr59">
-        <dc:Bounds x="312" y="252" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="293" y="295" width="75" height="14" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0mbh0t2_di" bpmnElement="RacunID">
         <dc:Bounds x="850" y="340" width="100" height="80" />
@@ -114,28 +144,31 @@
           <dc:Bounds x="662" y="302" width="16" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0nk05cn_di" bpmnElement="Event_06xi2mg">
-        <dc:Bounds x="932" y="772" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_0jl7z9b_di" bpmnElement="Event_1oafr59">
+        <dc:Bounds x="312" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="294" y="295" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_06zi4vl" bpmnElement="Activity_12o4mfz">
+        <dc:Bounds x="840" y="710" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0silqka_di" bpmnElement="Flow_0silqka">
         <di:waypoint x="570" y="750" />
-        <di:waypoint x="850" y="750" />
+        <di:waypoint x="840" y="750" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1dldlhe_di" bpmnElement="Flow_1dldlhe">
-        <di:waypoint x="900" y="710" />
-        <di:waypoint x="900" y="420" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0uac6l8_di" bpmnElement="Flow_0uac6l8">
-        <di:waypoint x="520" y="420" />
-        <di:waypoint x="520" y="710" />
+      <bpmndi:BPMNEdge id="Flow_0mp9hsd_di" bpmnElement="Flow_0mp9hsd">
+        <di:waypoint x="348" y="270" />
+        <di:waypoint x="470" y="270" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0kk19d4_di" bpmnElement="Flow_0kk19d4">
         <di:waypoint x="520" y="310" />
         <di:waypoint x="520" y="340" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0mp9hsd_di" bpmnElement="Flow_0mp9hsd">
-        <di:waypoint x="348" y="270" />
-        <di:waypoint x="470" y="270" />
+      <bpmndi:BPMNEdge id="Flow_0uac6l8_di" bpmnElement="Flow_0uac6l8">
+        <di:waypoint x="520" y="420" />
+        <di:waypoint x="520" y="710" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_17vt59s_di" bpmnElement="Flow_17vt59s">
         <di:waypoint x="900" y="340" />
@@ -144,6 +177,10 @@
       <bpmndi:BPMNEdge id="Flow_0y4rwsk_di" bpmnElement="Flow_0y4rwsk">
         <di:waypoint x="950" y="270" />
         <di:waypoint x="1022" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0n9gd88_di" bpmnElement="Flow_0n9gd88">
+        <di:waypoint x="900" y="710" />
+        <di:waypoint x="900" y="420" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1ggpt7g_di" bpmnElement="DataOutputAssociation_1ggpt7g">
         <di:waypoint x="570" y="272" />
