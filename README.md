@@ -4,7 +4,7 @@ Projekt iz predmeta Upravljanje Poslovnim Procesima
 
 Tema: Restoran
 
-#Kako pokrenuti PDA?
+# Kako pokrenuti PDA?
 
 1. pokrenuti docker
 2. utipkati u cmd-u -> docker pull camunda/camunda-bpm-platform:latest
