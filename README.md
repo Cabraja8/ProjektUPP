@@ -12,7 +12,7 @@ Tema: Restoran
 
 3. utipkati u cmd-u -> docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:latest
 
-4. utipkati u cmd-u start camunda
+4. utipkati u cmd-u docker start camunda
 
 5. treba na internetu utipkati url -> http://localhost:8080/engine-rest/process-definition/key/Restoran/start
 
